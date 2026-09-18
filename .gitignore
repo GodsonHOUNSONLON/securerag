@@ -1,0 +1,28 @@
+# Environnement
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Données locales
+data/raw/
+data/processed/
+*.db
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+*.pid
+
+# Divers
+.DS_Store
+.pytest_cache/
+.mypy_cache/
