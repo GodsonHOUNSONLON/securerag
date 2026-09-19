@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+ingestion/fetch_nvd.py
+securerag.egg-info/PKG-INFO
+securerag.egg-info/SOURCES.txt
+securerag.egg-info/dependency_links.txt
+securerag.egg-info/requires.txt
+securerag.egg-info/top_level.txt
