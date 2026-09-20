@@ -7,9 +7,13 @@ Fonctionnalités :
 - Idempotence : les CVE déjà téléchargées ne sont pas re-téléchargées
 - Sauvegarde brute en JSONL dans data/raw/ pour traçabilité
 - Logging structuré des lots traités
+- Deux modes de filtrage par date (mutuellement exclusifs, contrainte de l'API NVD) :
+    --last-mod-days : CVE modifiées récemment (inclut d'anciennes CVE republiées)
+    --pub-days      : CVE publiées récemment (vraies nouvelles vulnérabilités)
 
 Usage :
     python -m ingestion.fetch_nvd --last-mod-days 120 --output data/raw/cves.jsonl
+    python -m ingestion.fetch_nvd --pub-days 120 --max-results 1000
 """
 
 from __future__ import annotations
@@ -77,17 +81,15 @@ def fetch_page(
     client: httpx.Client,
     config: NvdClientConfig,
     start_index: int,
-    last_mod_start: str | None,
-    last_mod_end: str | None,
+    date_filter: dict[str, str] | None,
 ) -> dict:
     """Appelle l'API NVD pour une page de résultats, avec retry basique sur les erreurs transitoires."""
     params: dict[str, str | int] = {
         "resultsPerPage": config.results_per_page,
         "startIndex": start_index,
     }
-    if last_mod_start and last_mod_end:
-        params["lastModStartDate"] = last_mod_start
-        params["lastModEndDate"] = last_mod_end
+    if date_filter:
+        params.update(date_filter)
 
     headers = {"apiKey": config.api_key} if config.api_key else {}
 
@@ -113,9 +115,44 @@ def fetch_page(
     raise RuntimeError(f"Échec définitif de récupération pour startIndex={start_index} après {max_retries} tentatives.")
 
 
+def build_date_filter(last_mod_days: int | None, pub_days: int | None) -> dict[str, str] | None:
+    """
+    Construit le filtre de date à envoyer à l'API NVD.
+    lastModStartDate/EndDate et pubStartDate/EndDate sont mutuellement exclusifs
+    côté API NVD (une requête ne peut pas combiner les deux).
+    """
+    if last_mod_days and pub_days:
+        raise ValueError("--last-mod-days et --pub-days sont mutuellement exclusifs (contrainte de l'API NVD).")
+
+    if last_mod_days:
+        end = datetime.now(timezone.utc)
+        start = end - timedelta(days=last_mod_days)
+        date_filter = {
+            "lastModStartDate": start.strftime("%Y-%m-%dT%H:%M:%S.000"),
+            "lastModEndDate": end.strftime("%Y-%m-%dT%H:%M:%S.000"),
+        }
+        logger.info("Filtrage sur les CVE modifiées entre %s et %s",
+                    date_filter["lastModStartDate"], date_filter["lastModEndDate"])
+        return date_filter
+
+    if pub_days:
+        end = datetime.now(timezone.utc)
+        start = end - timedelta(days=pub_days)
+        date_filter = {
+            "pubStartDate": start.strftime("%Y-%m-%dT%H:%M:%S.000"),
+            "pubEndDate": end.strftime("%Y-%m-%dT%H:%M:%S.000"),
+        }
+        logger.info("Filtrage sur les CVE publiées entre %s et %s",
+                    date_filter["pubStartDate"], date_filter["pubEndDate"])
+        return date_filter
+
+    return None
+
+
 def ingest(
     output_path: Path,
     last_mod_days: int | None,
+    pub_days: int | None,
     max_results: int | None,
 ) -> None:
     api_key = os.getenv("NVD_API_KEY") or None
@@ -129,14 +166,7 @@ def ingest(
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     already_ingested = load_already_ingested_ids(output_path)
-
-    last_mod_start = last_mod_end = None
-    if last_mod_days:
-        end = datetime.now(timezone.utc)
-        start = end - timedelta(days=last_mod_days)
-        last_mod_start = start.strftime("%Y-%m-%dT%H:%M:%S.000")
-        last_mod_end = end.strftime("%Y-%m-%dT%H:%M:%S.000")
-        logger.info("Filtrage sur les CVE modifiées entre %s et %s", last_mod_start, last_mod_end)
+    date_filter = build_date_filter(last_mod_days, pub_days)
 
     total_written = 0
     start_index = 0
@@ -151,7 +181,7 @@ def ingest(
                 break
 
             logger.info("Récupération du lot startIndex=%d...", start_index)
-            page = fetch_page(client, config, start_index, last_mod_start, last_mod_end)
+            page = fetch_page(client, config, start_index, date_filter)
 
             total_results = page.get("totalResults", 0)
             vulnerabilities = page.get("vulnerabilities", [])
@@ -188,11 +218,20 @@ def main() -> None:
         default=Path("data/raw/cves.jsonl"),
         help="Chemin du fichier JSONL de sortie (append, idempotent).",
     )
-    parser.add_argument(
+    date_group = parser.add_mutually_exclusive_group()
+    date_group.add_argument(
         "--last-mod-days",
         type=int,
         default=None,
-        help="Ne récupérer que les CVE modifiées dans les N derniers jours (recommandé pour un premier run rapide).",
+        help="Ne récupérer que les CVE modifiées dans les N derniers jours "
+             "(inclut d'anciennes CVE republiées/mises à jour récemment).",
+    )
+    date_group.add_argument(
+        "--pub-days",
+        type=int,
+        default=None,
+        help="Ne récupérer que les CVE PUBLIÉES dans les N derniers jours "
+             "(cible les vulnérabilités réellement nouvelles, pas les republications). Max 120.",
     )
     parser.add_argument(
         "--max-results",
@@ -202,7 +241,17 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    ingest(output_path=args.output, last_mod_days=args.last_mod_days, max_results=args.max_results)
+    if args.pub_days is not None and args.pub_days > 120:
+        parser.error("--pub-days ne peut pas dépasser 120 (limite de l'API NVD).")
+    if args.last_mod_days is not None and args.last_mod_days > 120:
+        parser.error("--last-mod-days ne peut pas dépasser 120 (limite de l'API NVD).")
+
+    ingest(
+        output_path=args.output,
+        last_mod_days=args.last_mod_days,
+        pub_days=args.pub_days,
+        max_results=args.max_results,
+    )
 
 
 if __name__ == "__main__":
