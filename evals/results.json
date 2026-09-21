@@ -1,0 +1,628 @@
+{
+  "summary": {
+    "n_cases": 24,
+    "n_non_trap_cases": 20,
+    "n_trap_cases": 4,
+    "precision_retrieval_top_k": 0.9,
+    "hallucination_rate": 0.0,
+    "severity_coherence_rate": 0.4,
+    "trap_success_rate": 1.0,
+    "avg_latency_seconds": 22.92,
+    "p95_latency_seconds": 30.1,
+    "avg_approx_cost_usd": 0.005913,
+    "total_approx_cost_usd": 0.1419
+  },
+  "cases": [
+    {
+      "case_id": "case_01",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-1999-1199"
+      ],
+      "predicted_cve_ids": [
+        "CVE-1999-1199"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-1999-0107",
+        "CVE-1999-1237",
+        "CVE-1999-1293",
+        "CVE-2000-1206",
+        "CVE-1999-1199"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 60.21,
+      "approx_cost_usd": 0.005364
+    },
+    {
+      "case_id": "case_02",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2000-1206"
+      ],
+      "predicted_cve_ids": [],
+      "retrieved_cve_ids": [
+        "CVE-1999-1412"
+      ],
+      "retrieval_hit": false,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "moyenne",
+      "predicted_severity": "haute",
+      "severity_match": false,
+      "niveau_confiance": 0.35,
+      "refinement_count": 0,
+      "latency_seconds": 19.55,
+      "approx_cost_usd": 0.005517
+    },
+    {
+      "case_id": "case_03",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-1999-1293"
+      ],
+      "predicted_cve_ids": [
+        "CVE-1999-1293"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-1999-0107",
+        "CVE-1999-1237",
+        "CVE-1999-1293",
+        "CVE-2000-1206",
+        "CVE-1999-0071"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "haute",
+      "severity_match": true,
+      "niveau_confiance": 0.92,
+      "refinement_count": 0,
+      "latency_seconds": 18.51,
+      "approx_cost_usd": 0.005139
+    },
+    {
+      "case_id": "case_04",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2018-25351"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2018-25351"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2018-25351"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "haute",
+      "severity_match": true,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 19.14,
+      "approx_cost_usd": 0.005202
+    },
+    {
+      "case_id": "case_05",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2018-25381"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2018-25381"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2018-25381"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "haute",
+      "severity_match": true,
+      "niveau_confiance": 0.92,
+      "refinement_count": 0,
+      "latency_seconds": 22.34,
+      "approx_cost_usd": 0.006471
+    },
+    {
+      "case_id": "case_06",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2026-9573"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-9573",
+        "CVE-2026-9574",
+        "CVE-2026-9575"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-9573",
+        "CVE-2026-9574",
+        "CVE-2026-9575"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "haute",
+      "severity_match": true,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 19.54,
+      "approx_cost_usd": 0.005625
+    },
+    {
+      "case_id": "case_07",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2026-42785"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-42785"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-42785",
+        "CVE-2026-41917",
+        "CVE-2026-42425"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.92,
+      "refinement_count": 0,
+      "latency_seconds": 23.15,
+      "approx_cost_usd": 0.006651
+    },
+    {
+      "case_id": "case_08",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2019-1068"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2019-1068"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-1999-1556",
+        "CVE-2019-1068"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.75,
+      "refinement_count": 0,
+      "latency_seconds": 21.51,
+      "approx_cost_usd": 0.006273
+    },
+    {
+      "case_id": "case_09",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-1999-0936"
+      ],
+      "predicted_cve_ids": [
+        "CVE-1999-0936"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-1999-0936"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.92,
+      "refinement_count": 0,
+      "latency_seconds": 23.32,
+      "approx_cost_usd": 0.006561
+    },
+    {
+      "case_id": "case_10",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2026-42733"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-42733"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-42733"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "haute",
+      "severity_match": true,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 21.32,
+      "approx_cost_usd": 0.006399
+    },
+    {
+      "case_id": "case_11",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2018-25349"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2018-25349"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2018-25349",
+        "CVE-2018-25350"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "moyenne",
+      "predicted_severity": "haute",
+      "severity_match": false,
+      "niveau_confiance": 0.92,
+      "refinement_count": 0,
+      "latency_seconds": 21.11,
+      "approx_cost_usd": 0.006084
+    },
+    {
+      "case_id": "case_12",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2018-25361"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2018-25361"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2018-25361"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "moyenne",
+      "predicted_severity": "haute",
+      "severity_match": false,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 30.1,
+      "approx_cost_usd": 0.007965
+    },
+    {
+      "case_id": "case_13",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2026-42745"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-42746",
+        "CVE-2026-42745"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-42746",
+        "CVE-2026-42738",
+        "CVE-2026-42745"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "haute",
+      "severity_match": true,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 23.24,
+      "approx_cost_usd": 0.006705
+    },
+    {
+      "case_id": "case_14",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-1999-1076"
+      ],
+      "predicted_cve_ids": [
+        "CVE-1999-1076"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-1999-1393",
+        "CVE-2025-46280",
+        "CVE-2025-46284",
+        "CVE-1999-1076",
+        "CVE-1999-1077"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "moyenne",
+      "predicted_severity": "haute",
+      "severity_match": false,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 22.73,
+      "approx_cost_usd": 0.006732
+    },
+    {
+      "case_id": "case_15",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-1999-0255"
+      ],
+      "predicted_cve_ids": [
+        "CVE-1999-0255",
+        "CVE-1999-0679"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-1999-0255",
+        "CVE-1999-0679"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 22.53,
+      "approx_cost_usd": 0.006642
+    },
+    {
+      "case_id": "case_16",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-1999-0319"
+      ],
+      "predicted_cve_ids": [
+        "CVE-1999-0318",
+        "CVE-1999-0319"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-1999-0318",
+        "CVE-1999-0319"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 20.7,
+      "approx_cost_usd": 0.005553
+    },
+    {
+      "case_id": "case_17",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2026-48690"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-48690",
+        "CVE-2026-48689"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-48693",
+        "CVE-2026-48690",
+        "CVE-2026-48689",
+        "CVE-2026-48696",
+        "CVE-2026-48683"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 22.43,
+      "approx_cost_usd": 0.006714
+    },
+    {
+      "case_id": "case_18",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2026-42758"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-42758"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-42758",
+        "CVE-2026-42757"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "critique",
+      "predicted_severity": "critique",
+      "severity_match": true,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 19.84,
+      "approx_cost_usd": 0.005904
+    },
+    {
+      "case_id": "case_19",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2026-42731"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-42731"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-42731"
+      ],
+      "retrieval_hit": true,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "critique",
+      "predicted_severity": "critique",
+      "severity_match": true,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 18.98,
+      "approx_cost_usd": 0.005643
+    },
+    {
+      "case_id": "case_20",
+      "is_trap": false,
+      "expected_cve_ids": [
+        "CVE-2025-41670"
+      ],
+      "predicted_cve_ids": [
+        "CVE-2026-9489"
+      ],
+      "retrieved_cve_ids": [
+        "CVE-2026-9489",
+        "CVE-1999-0496",
+        "CVE-2000-0070",
+        "CVE-1999-0975",
+        "CVE-1999-0534"
+      ],
+      "retrieval_hit": false,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": null,
+      "expected_severity": "haute",
+      "predicted_severity": "critique",
+      "severity_match": false,
+      "niveau_confiance": 0.65,
+      "refinement_count": 0,
+      "latency_seconds": 25.5,
+      "approx_cost_usd": 0.006912
+    },
+    {
+      "case_id": "trap_01",
+      "is_trap": true,
+      "expected_cve_ids": [],
+      "predicted_cve_ids": [],
+      "retrieved_cve_ids": [
+        "CVE-2000-0524",
+        "CVE-1999-1164",
+        "CVE-2000-0105",
+        "CVE-1999-1033",
+        "CVE-2000-0216"
+      ],
+      "retrieval_hit": null,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": true,
+      "expected_severity": "basse",
+      "predicted_severity": "basse",
+      "severity_match": true,
+      "niveau_confiance": 0.25,
+      "refinement_count": 0,
+      "latency_seconds": 20.04,
+      "approx_cost_usd": 0.004617
+    },
+    {
+      "case_id": "trap_02",
+      "is_trap": true,
+      "expected_cve_ids": [],
+      "predicted_cve_ids": [],
+      "retrieved_cve_ids": [
+        "CVE-2019-3773",
+        "CVE-2026-9524",
+        "CVE-2026-46017",
+        "CVE-2000-0304",
+        "CVE-2026-42797"
+      ],
+      "retrieval_hit": null,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": true,
+      "expected_severity": "basse",
+      "predicted_severity": "basse",
+      "severity_match": true,
+      "niveau_confiance": 0.85,
+      "refinement_count": 0,
+      "latency_seconds": 17.41,
+      "approx_cost_usd": 0.004761
+    },
+    {
+      "case_id": "trap_03",
+      "is_trap": true,
+      "expected_cve_ids": [],
+      "predicted_cve_ids": [],
+      "retrieved_cve_ids": [
+        "CVE-2021-3572",
+        "CVE-2026-40034",
+        "CVE-2026-3515",
+        "CVE-2026-9312",
+        "CVE-2026-8606"
+      ],
+      "retrieval_hit": null,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": true,
+      "expected_severity": "basse",
+      "predicted_severity": "moyenne",
+      "severity_match": false,
+      "niveau_confiance": 0.75,
+      "refinement_count": 0,
+      "latency_seconds": 20.06,
+      "approx_cost_usd": 0.004752
+    },
+    {
+      "case_id": "trap_04",
+      "is_trap": true,
+      "expected_cve_ids": [],
+      "predicted_cve_ids": [],
+      "retrieved_cve_ids": [
+        "CVE-2018-25359",
+        "CVE-2026-9490",
+        "CVE-2026-49017",
+        "CVE-2025-41670",
+        "CVE-2026-45976"
+      ],
+      "retrieval_hit": null,
+      "hallucinated": false,
+      "hallucinated_ids": [],
+      "trap_handled_correctly": true,
+      "expected_severity": "basse",
+      "predicted_severity": "basse",
+      "severity_match": true,
+      "niveau_confiance": 0.95,
+      "refinement_count": 0,
+      "latency_seconds": 16.88,
+      "approx_cost_usd": 0.003735
+    }
+  ]
+}
