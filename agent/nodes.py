@@ -170,6 +170,12 @@ confiance basse plutôt que d'inventer ou de citer une CVE connue de ta mémoire
 - Si tu veux recommander de vérifier les CVE connues pour ce produit, formule-le sans numéro précis \
 (ex: "vérifier les avis de sécurité officiels du vendeur pour les versions concernées") plutôt que de \
 citer un identifiant CVE non vérifié par la recherche.
+- IMPORTANT pour la sévérité : si tu identifies dans cve_identifiees une CVE clairement correspondante \
+dont la sévérité CVSS est indiquée dans les résultats ci-dessus, ALIGNE ta sévérité prédite sur cette \
+sévérité CVSS plutôt que sur ton impression du ton de l'incident. N'escalade au-dessus de la sévérité \
+CVSS connue que si l'incident apporte une preuve concrète et objective d'aggravation (ex: compromission \
+confirmée, exfiltration de données avérée) — pas simplement parce que la description sonne grave. En \
+l'absence de CVE clairement identifiée, évalue la sévérité prudemment à partir des seuls faits rapportés.
 - Le niveau de confiance doit refléter honnêtement la qualité du match entre l'incident et les preuves disponibles.
 - Le plan de remédiation doit être concret et actionnable pour un analyste SOC."""
 
